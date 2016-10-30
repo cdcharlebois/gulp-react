@@ -18,11 +18,28 @@ var gulp = require("gulp"),
     jsonTransform = require("gulp-json-transform"),
     intercept = require("gulp-intercept"),
     argv = require("yargs").argv,
-    widgetBuilderHelper = require("widgetbuilder-gulp-helper");
+    widgetBuilderHelper = require("widgetbuilder-gulp-helper"),
+    // new stuff
+    concat = require("gulp-concat"),
+    react = require("gulp-react"),
+    htmlreplace = require("gulp-html-replace");
 
 var pkg = require("./package.json"),
     paths = widgetBuilderHelper.generatePaths(pkg),
     xmlversion = widgetBuilderHelper.xmlversion;
+
+var reactPaths = {
+  JSX: ["./src/**/*.jsx"],
+  CONCAT_OUT: "./src/MyWidget/widget/all.js",
+  DEST_SRC: "./src/MyWidget/widget/dist"
+}
+
+gulp.task("transform", function(){
+  gulp.src(reactPaths.JSX)
+    .pipe(react())
+    .pipe(concat(reactPaths.CONCAT_OUT))
+    .pipe(gulp.dest(reactPaths.DEST_SRC))
+})
 
 gulp.task("default", function() {
     gulp.watch("./src/**/*", ["compress"]);
