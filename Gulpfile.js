@@ -28,21 +28,21 @@ var pkg = require("./package.json"),
     paths = widgetBuilderHelper.generatePaths(pkg),
     xmlversion = widgetBuilderHelper.xmlversion;
 
-var reactPaths = {
-  JSX: ["./src/**/*.jsx"],
-  CONCAT_OUT: "./src/MyWidget/widget/all.js",
-  DEST_SRC: "./src/MyWidget/widget/dist"
-}
+// var reactPaths = {
+//   JSX: ["./src/**/*.jsx"],
+//   CONCAT_OUT: "./src/MyWidget/widget/all.js",
+//   DEST_SRC: "./src/MyWidget/widget/dist"
+// }
 
 gulp.task("transform", function(){
-  gulp.src(reactPaths.JSX)
+  console.log(paths)
+  gulp.src(paths.COMPONENTS_JSX + "/*.jsx")
     .pipe(react())
-    .pipe(concat(reactPaths.CONCAT_OUT))
-    .pipe(gulp.dest(reactPaths.DEST_SRC))
+    .pipe(gulp.dest(paths.COMPONENTS_JS))
 })
 
 gulp.task("default", function() {
-    gulp.watch("./src/**/*", ["compress"]);
+    gulp.watch("./src/**/*", ["transform", "compress"]);
     gulp.watch("./src/**/*.js", ["copy:js"]);
 });
 
