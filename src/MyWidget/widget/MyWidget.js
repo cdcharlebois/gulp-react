@@ -19,6 +19,7 @@ define([
     "MyWidget/widget/lib/react",
     "MyWidget/widget/lib/react-dom",
     "MyWidget/components/js/Test",
+    // "MyWidget/components/js/Child",
 
     "dojo/text!MyWidget/widget/template/MyWidget.html"
 ], function (declare,
@@ -39,6 +40,7 @@ define([
  React,
  ReactDOM,
  Test,
+ // Child,
   widgetTemplate) {
     "use strict";
 
