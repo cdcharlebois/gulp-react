@@ -3,8 +3,8 @@ define([
   "MyWidget/widget/lib/react-dom"
 ], function(React, ReactDOM) {
     return React.createClass({
-      constructor: function(){
-        this.state = {list: []}
+      getInitialState: function(){
+        return {list: []}
       },
 
 
@@ -24,15 +24,15 @@ define([
         }, this);
       },
 
-      listElements: function(){
-        return this.state.list.map(function(s) {
+
+
+      render: function(){
+        debugger;
+        var listElements = this.state.list.map(function(s) {
           return <li>
             {s.jsonData.attributes.Name.value}
           </li>
-        })
-      },
-
-      render: function(){
+        });
         return (
           <div>
             <h3>Hello From react</h3>
