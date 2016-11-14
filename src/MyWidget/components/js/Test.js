@@ -7,7 +7,8 @@ define([
       render: function(){
         return (
           React.createElement("div", null, 
-            React.createElement(Child, null)
+            React.createElement("h3", null, this.props.person.get('Name'), "'s Pets"), 
+            React.createElement(Child, {person: this.props.person})
           )
         )
       }

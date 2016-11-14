@@ -60,18 +60,20 @@ define([
         },
 
         postCreate: function () {
-            ReactDOM.render(
-              React.createElement(Test, null),
-              this.widgetBase
-            )
+
             logger.debug(this.id + ".postCreate");
 
         },
 
         update: function (obj, callback) {
             logger.debug(this.id + ".update");
-
             this._contextObj = obj;
+            if (this._contextObj){
+              ReactDOM.render(
+                React.createElement(Test, {person:this._contextObj}, null),
+                this.widgetBase
+              )
+            }
             this._updateRendering(callback);
         },
 

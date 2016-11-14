@@ -35,7 +35,7 @@ var pkg = require("./package.json"),
 // }
 
 gulp.task("transform", function(){
-  console.log(paths)
+  // console.log(paths)
   gulp.src(paths.COMPONENTS_JSX + "/*.jsx")
     .pipe(react())
     .pipe(gulp.dest(paths.COMPONENTS_JS))

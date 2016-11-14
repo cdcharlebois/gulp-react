@@ -7,7 +7,8 @@ define([
       render: function(){
         return (
           <div>
-            <Child />
+            <h3>{this.props.person.get('Name')}'s Pets</h3>
+            <Child person={this.props.person}/>
           </div>
         )
       }
