@@ -2,11 +2,19 @@ define([
     "MyWidget/widget/lib/react", "MyWidget/widget/lib/react-dom"
 ], function(React, ReactDOM) {
     return React.createClass({
+        // the state is what triggers the real-time DOM updates
+        // ---
+        // Here we're just initializing it with some default values
         getInitialState: function() {
-            return {list: [], newPetName: '', newPetType: ''}
+            return {list: [], newPetName: '', newPetType: 'cat'}
         },
 
-        componentDidMount: function() {
+        // componentWillMount is called immediately before the component is
+        // rendered to the DOM.
+        // ---
+        // Here, we call a microflow to fetch our data, and store that in the
+        // state
+        componentWillMount: function() {
             var self = this
             mx.data.action({
                 params: {
@@ -23,13 +31,22 @@ define([
                 }
             }, this)
         },
-        //listeners
+        // listeners
+        // ---
+        // fired when a user changes the pet name in the form
         handleNameChange: function(e) {
             this.setState({newPetName: e.target.value})
         },
+        // fired when a user changes the pet type in the form
         handleTypeChange: function(e) {
             this.setState({newPetType: e.target.value})
         },
+        // fired when the user clicks the "add" button
+        // -----
+        // We use this to:
+        // 1. Create a new mx object on the server
+        // 2. update the state with that object, so that our UI updates
+        //    immediately
         handleAdd: function() {
             var self = this
             mx.data.create({
@@ -38,7 +55,8 @@ define([
                     console.log("Object created on server");
                     obj.set('Name', self.state.newPetName)
                     obj.set('AnimalType', self.state.newPetType)
-                    obj.addReference('TestSuite.Pet_Person', self.props.person.getGuid())
+                    obj.addReference('TestSuite.Pet_Person',
+                                        self.props.person.getGuid())
                     var newList = self.state.list
                     newList.push(obj)
                     self.setState({list: newList, newPetName: ''})
@@ -48,11 +66,13 @@ define([
                 }
             });
         },
+        // fired when the user is finished adding new records
+        // -----
+        // Use this to run the commit microflow and persist the data from the
+        // server to the DB
         handleSubmit: function() {
             var self = this
-            ,   pets = self.state.list.map(function(pet) {
-                        return pet.getGuid()
-                      })
+            ,   pets = self.state.list.map(function(p){return p.getGuid()})
             console.log(pets)
             mx.data.action({
                 params: {
@@ -85,7 +105,9 @@ define([
                             React.createElement("option", {value: "cat"}, "cat"), 
                             React.createElement("option", {value: "dog"}, "dog")
                         ), 
+                        React.createElement("br", null), 
                         React.createElement("input", {type: "button", value: "add pet", onClick: this.handleAdd}), 
+                        React.createElement("br", null), 
                         React.createElement("input", {type: "button", value: "Finished Adding Pets", onClick: this.handleSubmit})
                     )
                 )

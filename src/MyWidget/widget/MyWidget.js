@@ -55,15 +55,15 @@ define([
         _handles: null,
         _contextObj: null,
 
-        constructor: function () {
-            this._handles = [];
-        },
-
-        postCreate: function () {
-
-            logger.debug(this.id + ".postCreate");
-
-        },
+        // constructor: function () {
+        //     this._handles = [];
+        // },
+        //
+        // postCreate: function () {
+        //
+        //     logger.debug(this.id + ".postCreate");
+        //
+        // },
 
         update: function (obj, callback) {
             logger.debug(this.id + ".update");
@@ -74,28 +74,28 @@ define([
                 this.widgetBase
               )
             }
-            this._updateRendering(callback);
+            callback();
         },
 
-        resize: function (box) {
-          logger.debug(this.id + ".resize");
-        },
-
-        uninitialize: function () {
-          logger.debug(this.id + ".uninitialize");
-        },
-
-        _updateRendering: function (callback) {
-            logger.debug(this.id + "._updateRendering");
-
-            // if (this._contextObj !== null) {
-            //     dojoStyle.set(this.domNode, "display", "block");
-            // } else {
-            //     dojoStyle.set(this.domNode, "display", "none");
-            // }
-
-            mendix.lang.nullExec(callback);
-        }
+        // resize: function (box) {
+        //   logger.debug(this.id + ".resize");
+        // },
+        //
+        // uninitialize: function () {
+        //   logger.debug(this.id + ".uninitialize");
+        // },
+        //
+        // _updateRendering: function (callback) {
+        //     logger.debug(this.id + "._updateRendering");
+        //
+        //     // if (this._contextObj !== null) {
+        //     //     dojoStyle.set(this.domNode, "display", "block");
+        //     // } else {
+        //     //     dojoStyle.set(this.domNode, "display", "none");
+        //     // }
+        //
+        //     mendix.lang.nullExec(callback);
+        // }
     });
 });
 
