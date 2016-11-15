@@ -38,7 +38,11 @@ gulp.task("transform", function(){
   // console.log(paths)
   gulp.src(paths.COMPONENTS_JSX + "/*.jsx")
     .pipe(react())
+    .on('error', function(e){
+      console.log('There was an error transforming your JSX: ' + e)
+    })
     .pipe(gulp.dest(paths.COMPONENTS_JS))
+
 })
 
 gulp.task("default", function() {
