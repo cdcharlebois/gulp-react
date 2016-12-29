@@ -18,8 +18,8 @@ define([
     //my dependencies
     "MyWidget/widget/lib/react",
     "MyWidget/widget/lib/react-dom",
-    "MyWidget/components/js/Test",
-    // "MyWidget/components/js/Child",
+    "MyWidget/components/js/ReactRoot",
+    "MyWidget/components/js/Child",
 
     "dojo/text!MyWidget/widget/template/MyWidget.html"
 ], function (declare,
@@ -39,8 +39,8 @@ define([
  // dojoEvent,
  React,
  ReactDOM,
- Test,
- // Child,
+ ReactRoot,
+ Child,
   widgetTemplate) {
     "use strict";
 
@@ -70,7 +70,7 @@ define([
             this._contextObj = obj;
             if (this._contextObj){
               ReactDOM.render(
-                React.createElement(Test, {person:this._contextObj}, null),
+                React.createElement(ReactRoot, {person:this._contextObj}, null),
                 this.widgetBase
               )
             }
